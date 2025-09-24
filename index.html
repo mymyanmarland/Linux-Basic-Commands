@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Terminal Commands Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+
+        .command-group {
+            margin-bottom: 25px;
+        }
+
+        .command {
+            background: #2c3e50;
+            color: #00ff41;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            margin: 8px 0;
+            display: inline-block;
+            font-size: 1.1em;
+            border: 2px solid #34495e;
+            transition: all 0.3s ease;
+        }
+
+        .command:hover {
+            background: #34495e;
+            transform: scale(1.02);
+        }
+
+        .myanmar-text {
+            font-size: 1.1em;
+            line-height: 1.9;
+            color: #2c3e50;
+            margin: 15px 0;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #27ae60;
+        }
+
+        .warning {
+            background: linear-gradient(120deg, #ffeaa7 0%, #fab1a0 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #e17055;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid #3498db;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            color: #74b9ff;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+
+        .toc {
+            background: #ecf0f1;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .toc h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin: 8px 0;
+            padding: 8px 15px;
+            background: white;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .toc li:hover {
+            background: #3498db;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🖥️ Linux Terminal Commands Tutorial</h1>
+            <p>လင်းနူးစ် တာမီနယ် ကွန်မန်း သင်ခန်းစာများ</p>
+        </div>
+
+        <div class="content">
+            <div class="toc">
+                <h3>📚 Table of Contents</h3>
+                <ul>
+                    <li>📁 File & Folder Management</li>
+                    <li>📋 File Operations</li>
+                    <li>👤 System Information</li>
+                    <li>🔍 File Analysis</li>
+                    <li>📊 Text Processing</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>📁 Folder နှင့် File Management</h2>
+                
+                <div class="command-group">
+                    <div class="myanmar-text">
+                        <strong>Folder တစ်ခုဆောက်တော့မယ် ဆိုရင် mkdir နဲ့ ဆောက်လို့ရတယ် ။</strong>
+                    </div>
+                    <div class="command">mkdir folder_name</div>
+                    
+                    <div class="myanmar-text">
+                        <strong>File တစ်ခု ဆောက်ချင်တယ် ဆိုရင်တော့ touch command နဲ့ ဆောက်လို့ရတယ် ။</strong>
+                    </div>
+                    <div class="command">touch filename.txt</div>
+                </div>
+
+                <div class="warning">
+                    <div class="myanmar-text">
+                        <strong>Folder ဖျက် ချင်တယ်ဆိုရင် ကိုဖျက်ချင်တဲ့ Folder နာမည်ကို သိရမယ် ပြီးရင် rmdir command နဲ့ ဖျက်လို့ရတယ် ။ Folder Name ရဲ့ အနောက်မှာ ( / ) လေး ထည့်ဖို့ မမေ့ နဲ့ ၊ Tab Key နဲ့ တွဲ သုံးတယ် ဆိုရင်တော့ Auto ပါလာလိမ့်မယ် ။</strong>
+                    </div>
+                    <div class="command">rmdir folder_name/</div>
+                </div>
+
+                <div class="highlight">
+                    <div class="myanmar-text">
+                        <strong>Folder ပဲ ဖြစ်ဖြစ် File ပဲ ဖြစ်ဖြစ် ဘာဖြစ်ဖြစ် ဖျက်ချင်တယ် ဆိုရင်တော့ ( rm -rf ) command ကိုသုံးပြီး ဖျက်ပေးလို့ရတယ် ။ ဘာ error မှာမတက်ဘဲ နဲ့ကောင်းကောင်းမွန်မွန် ပျက်ချင်ရင် ဒီ Command ကိုသုံးရတယ် ။</strong>
+                    </div>
+                    <div class="command">rm -rf file_or_folder</div>
+                    <div class="command">rm -rf file1 file2 folder1 folder2</div>
+                </div>
+
+                <div class="myanmar-text">
+                    <strong>Terminal က ထွက်ချင်ရင် ( exit ) command ကိုသုံးရတယ်</strong>
+                </div>
+                <div class="command">exit</div>
+            </div>
+
+            <div class="section">
+                <h2>📋 File Operations - Copy & Move</h2>
+                
+                <div class="command-group">
+                    <div class="myanmar-text">
+                        <strong>File Copy - File တွေကို Copy ကူးချင်တယ်ဆိုရင် ( cp ) Command နဲ့ သုံးလို့ရတယ် ။ အရင် ဆုံး ကို ကူးချင်တဲ့ File ရှိတဲ့ နေရာကို သွား ရောက်ပြီ ဆိုရင် ကို ကူး ပြီးထည့်လိုက်ချင်တဲ့ Folder ကို ရွေးပြီးပြီး ထည့်ပေးရတယ် ။</strong>
+                    </div>
+                    <div class="command">cp source_file destination_path</div>
+                    
+                    <div class="myanmar-text">
+                        <strong>လမ်းကြောင်းကို မှန်အောင်ရွေ့ ဖို့ လိုတယ် ။ ရွေ့ ချင်ရင် အရင်ဆုံး ( pwd ) command သုံးပြီး ကိုရွှေ့ချင်တဲ့ Folder ကဘယ်အောက်ရောက်နေလဲ ဆိုတာကို အရင် စစ် ။</strong>
+                    </div>
+                    <div class="command">pwd</div>
+                </div>
+
+                <div class="command-group">
+                    <div class="myanmar-text">
+                        <strong>File တွေကို ရွှေ့ ချင်ရင် ( mv ) Command ကိုသုံးရတယ် ။ ဒီဟလဲ အပေါ်က copy file လိုမျိုးပဲ တူတူပဲ ဒါကတော့ ဖိုင်တွေကို ကော်ပီ ကူးထည့်တာ မဟုတ်ပဲ အပြီး အပိုင် ရွေ့ချင်တဲ့ အခါမျိုးမှာ သုံးတယ် ။ ဒီ Command က Rename လုပ်ချင်ရင်လဲ သုံးလို့ရတယ် ။</strong>
+                    </div>
+                    <div class="command">mv source_file destination_path</div>
+                    
+                    <div class="myanmar-text">
+                        <strong>နාမည် ချိန်းမယ် ဆိုရင် ( mv ကိုရဲ့မူရင်းရှိတဲ့ File name ကိုချိန်းချင်တဲ့ File name ) enter ခေါက်လိုက်။ ဒီလိုနည်းလမ်းနဲ့ နာမည်ချိန်းလို့ရတယ် ။</strong>
+                    </div>
+                    <div class="command">mv old_filename new_filename</div>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>👤 User Information</h3>
+                    <div class="myanmar-text">
+                        <strong>User Account ကြည့်ချင်တယ် ဆိုရင် ( whoami ) နဲ့ကြည့်လို့ရတယ် ။</strong>
+                    </div>
+                    <div class="command">whoami</div>
+                </div>
+
+                <div class="card">
+                    <h3>📜 Command History</h3>
+                    <div class="myanmar-text">
+                        <strong>ရိုက်ခဲ့တဲ့ Command တွေကိုကြည့်ချင်တယ် ဆိုရင် ( History ) နဲ့ကြည့်လို့ရတယ် ။</strong>
+                    </div>
+                    <div class="command">history</div>
+                    
+                    <div class="myanmar-text">
+                        <strong>အဲ့လို ရိုက်ခဲ့တဲ့ Command တွေကို ဖျတ်ချရင် ( HISTSIZE=0 ) command နဲ့ပြန်ဖျက်တယ် ။</strong>
+                    </div>
+                    <div class="command">HISTSIZE=0</div>
+                </div>
+
+                <div class="card">
+                    <h3>🖥️ System Information</h3>
+                    <div class="myanmar-text">
+                        <strong>Kernel Version ကို ကြည့်မယ် ဆိုရင် ( uname -a )</strong>
+                    </div>
+                    <div class="command">uname -a</div>
+                    
+                    <div class="myanmar-text">
+                        <strong>Ubuntu Version ကို ကြည့်ချင်တယ် ဆိုရင် ( cat /etc/os-release ) နဲ့ ကြည့်</strong>
+                    </div>
+                    <div class="command">cat /etc/os-release</div>
+                </div>
+
+                <div class="card">
+                    <h3>🌐 Network & Hostname</h3>
+                    <div class="myanmar-text">
+                        <strong>Hostname ကို ချိန်းလို့ရတယ် အသေမဟုတ်ဘူး - Hostname ကို ချိန်းချင်ရင် ( sudo hostname ချိန်းချင်တဲ့ နာမည် ရေး Enter )</strong>
+                    </div>
+                    <div class="command">sudo hostname new_hostname</div>
+                    
+                    <div class="myanmar-text">
+                        <strong>ifconfig ဆိုတာ IP Address တွေကိုကြည့်တာ ။ တကယ်လို့ ကို့ Ubuntu မှာ net-tools မသွင်းရသေးဘူး ဆိုရင်တော့ ဒီ ifconfig သုံးလိုက်ရင်တော့ error ပြပါလিမ့်မယ် ။</strong>
+                    </div>
+                    <div class="command">ifconfig</div>
+                </div>
+
+                <div class="card">
+                    <h3>⏱️ System Uptime</h3>
+                    <div class="myanmar-text">
+                        <strong>uptime - ဆိုတာ ကို့ရဲ့ System ကြီး run နေတာ ဘယ်လောက်ရှိသွားပြီလဲဆိုတာ ကိုသွားကြည့်တာ</strong>
+                    </div>
+                    <div class="command">uptime</div>
+                </div>
+
+                <div class="card">
+                    <h3>🔍 File Location</h3>
+                    <div class="myanmar-text">
+                        <strong>which - located File ကို့စတ်ထဲမှာ ဘယ် File တွေ ဘယ်နေရာမှာ ရှိလဲ ဆိုတာကို ကြည့်တာ</strong>
+                    </div>
+                    <div class="command">which command_name</div>
+                    
+                    <div class="myanmar-text">
+                        <strong>type - ဒီ command ကလဲ which လို ပဲ သုံးလို့ရတယ် ။</strong>
+                    </div>
+                    <div class="command">type command_name</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📚 Command Information & Help</h2>
+                
+                <div class="command-group">
+                    <div class="myanmar-text">
+                        <strong>whatis - ကို ရိုက်လိုက်တဲ့ command က ဘာလဲ သိချင်ရင် ဒီ Command ကိုသုံးပြီးကြည့် လို့ရတယ် ။</strong>
+                    </div>
+                    <div class="command">whatis command_name</div>
+                </div>
+
+                <div class="highlight">
+                    <div class="myanmar-text">
+                        <strong>info - ဒီ command က သပ်သပ် ထပ်ပြီးတော့ install လုပ်ရတယ် မရှိရင် ၊ သူက တစ်ချို့ command တွေ ဘာလုပ်လဲ ဘာအဓိပ္ပာယ်လဲ ဆိုတာကို သိချင်ရင် သူ့ကို သုံးရတယ် ဥပမာ ( info sudo ) ( info mv ) ဒီလိုမျိုးတွေ သုံးရတယ် သူ့ကို</strong>
+                    </div>
+                    <div class="command">sudo apt install info</div>
+                    <div class="command">info sudo</div>
+                    <div class="command">info mv</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📊 File Analysis & Text Processing</h2>
+                
+                <div class="command-group">
+                    <div class="myanmar-text">
+                        <strong>file - ဘာဖိုင်လဲ ဆိုတာ ပြချင်ရင် ဒီ Command ကိုတွဲ သုံးရတယ် ။ ( file vv.txt ) ဒီလိုမျိုး ရေးပေးရတယ် ။</strong>
+                    </div>
+                    <div class="command">file filename.txt</div>
+                </div>
+
+                <div class="command-group">
+                    <div class="myanmar-text">
+                        <strong>wc - .txt file တွေကို ကြည့်တဲ့အခါမျိုးတွေမှာ သုံးတယ် ။ ဒီ option တွေနဲ့ တွဲသုံးတယ် Text File ထဲမှာ စာဘယ်နကြောင်း စားဘယ်နလုံးရှိလဲ ဆိုတာကို ကြည့်တဲ့ နေရာမှာ သုံးတယ် ။</strong>
+                    </div>
+                    <div class="command">wc filename.txt</div>
+                    
+                    <div class="myanmar-text">
+                        <strong>word အရေအတွက် ကို ကြည့်ချင်ရင် ( -w ) option လေးကို ရေးပေးရတယ်</strong>
+                    </div>
+                    <div class="command">wc -w filename.txt</div>
+                    <div class="command">wc -l filename.txt</div>
+                    <div class="command">wc -c filename.txt</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 Reference: <a href="https://chocolate-cissiee-37.tiiny.site/" target="_blank">https://chocolate-cissiee-37.tiiny.site/</a></p>
+            <p>📖 Linux Terminal Commands Tutorial - Created for Myanmar learners</p>
+            <p>💡 Practice these commands safely in a test environment first!</p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for table of contents
+        document.querySelectorAll('.toc li').forEach(item => {
+            item.addEventListener('click', function() {
+                const sections = document.querySelectorAll('.section h2');
+                const index = Array.from(this.parentElement.children).indexOf(this);
+                if (sections[index]) {
+                    sections[index].scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add copy functionality to command blocks
+        document.querySelectorAll('.command').forEach(command => {
+            command.addEventListener('click', function() {
+                navigator.clipboard.writeText(this.textContent).then(() => {
+                    const original = this.style.background;
+                    this.style.background = '#27ae60';
+                    setTimeout(() => {
+                        this.style.background = original;
+                    }, 200);
+                });
+            });
+            
+            command.style.cursor = 'pointer';
+            command.title = 'Click to copy command';
+        });
+    </script>
+</body>
+</html>
